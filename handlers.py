@@ -32,7 +32,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
     @staticmethod
     def _check_init_param(data):
-        return check_ip(data["host"]) and check_port(data["port"])
+        return check_port(data["port"])
 
     @staticmethod
     def _is_init_data(data):
