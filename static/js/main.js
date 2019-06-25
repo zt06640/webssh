@@ -49,11 +49,34 @@ function getTerminalSize() {
 
 
 function store(options) {
-    window.localStorage.host = options.host
-    window.localStorage.port = options.port
-    window.localStorage.username = options.username
-    window.localStorage.ispwd = options.ispwd;
-    window.localStorage.secret = options.secret
+    try{
+        
+        var const_hostArray = "hostarray";
+
+        var hostString = window.localStorage.getItem(const_hostArray);
+
+        var hostArray = []
+        
+        try {
+            hostArray = JSON.parse(hostString);
+            
+        } catch (e) {
+            hostArray = []
+        }
+
+        var filterResult = hostArray.filter(function (obj) {
+            return obj.host + options.port;
+        });
+
+        if(filterResult.length <= 0){
+            hostArray.push(options);
+        }
+
+        window.localStorage.setItem(const_hostArray,JSON.stringify(hostArray));
+
+    }catch(e){
+        // ignore
+    }
 }
 
 function check() {
