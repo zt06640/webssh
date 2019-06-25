@@ -57,7 +57,7 @@ function store(options) {
 }
 
 function check() {
-    return validResult["host"] && validResult["port"] && validResult["username"];
+    return validResult["port"] && validResult["username"];
 }
 
 function connect() {
