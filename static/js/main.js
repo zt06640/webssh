@@ -16,6 +16,7 @@ function openTerminal(options) {
         onConnect: function () {
             client.sendInitData(options);
             client.sendClientData('\r');
+            client.workerSendBeatData(options);
             console.debug('connection established');
         },
         onClose: function () {

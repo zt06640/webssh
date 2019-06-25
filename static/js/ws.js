@@ -59,7 +59,8 @@ WSSHClient.prototype.sendInitData = function (options) {
 WSSHClient.prototype.workerSendBeatData = function(options){
     var _this = this;
     this._workerOfBeat = setInterval (function() {
-        this._connection.send(JSON.stringify({"tp": "beat", "data": options}))
+        console.debug("beat -> " , options)
+        _this._connection.send(JSON.stringify({"tp": "beat", "data": options}))
     },5000)
 }
 
