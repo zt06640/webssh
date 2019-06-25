@@ -13,7 +13,7 @@ WSSHClient.prototype._generateEndpoint = function () {
 
 WSSHClient.prototype.connect = function (options) {
     var endpoint = this._generateEndpoint();
-
+    var _this = this;
     if (window.WebSocket) {
         this._connection = new WebSocket(endpoint);
     }
@@ -37,6 +37,7 @@ WSSHClient.prototype.connect = function (options) {
 
     this._connection.onclose = function (evt) {
         options.onClose();
+        clearInterval(_this._workerOfBeat);
     };
 };
 
@@ -53,6 +54,13 @@ WSSHClient.prototype.sendInitData = function (options) {
         secret: options.secret
     };
     this._connection.send(JSON.stringify({"tp": "init", "data": options}))
+}
+
+WSSHClient.prototype.workerSendBeatData = function(options){
+    var _this = this;
+    this._workerOfBeat = setInterval (function() {
+        this._connection.send(JSON.stringify({"tp": "beat", "data": options}))
+    },5000)
 }
 
 WSSHClient.prototype.sendClientData = function (data) {

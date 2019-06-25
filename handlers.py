@@ -38,6 +38,10 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     def _is_init_data(data):
         return data.get_type() == 'init'
 
+    @staticmethod
+    def _is_beat_data(data):
+        return data.get_type() == 'beat'
+
     def _id(self):
         return id(self)
 
@@ -55,6 +59,8 @@ class WSHandler(tornado.websocket.WebSocketHandler):
                 self.remove_client()
                 logging.warning('init param invalid: %s' % client_data.data)
         else:
+            if self._is_beat_data(client_data):
+                return
             if bridge:
                 bridge.trans_forward(client_data.data)
 
