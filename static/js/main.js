@@ -58,8 +58,7 @@ function store(options) {
         var hostArray = []
         
         try {
-            hostArray = JSON.parse(hostString);
-            
+            hostArray = JSON.parse(hostString) || [];
         } catch (e) {
             hostArray = []
         }
@@ -84,7 +83,7 @@ function check() {
 }
 
 function connect() {
-    var remember = $("#remember").is(":checked")
+    // var remember = $("#remember").is(":checked")
     var options = {
         host: $("#host").val(),
         port: $("#port").val(),
@@ -92,9 +91,10 @@ function connect() {
         ispwd: $("input[name=ispwd]:checked").val(),
         secret: $("#secret").val(),
     }
-    if (remember) {
-        store(options)
-    }
+    // if (remember) {
+    //     store(options)
+    // }
+    store(options);
     if (check()) {
         openTerminal(options)
     } else {
