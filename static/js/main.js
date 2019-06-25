@@ -64,7 +64,7 @@ function store(options) {
         }
 
         var filterResult = hostArray.filter(function (obj) {
-            return obj.host + options.port;
+            return (obj.host + obj.port) === (options.host + options.port);
         });
 
         if(filterResult.length <= 0){
