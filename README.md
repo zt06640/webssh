@@ -11,7 +11,7 @@ License: `MIT` (see LICENSE)
 Information
 -----------
 
-> 1.git clone https://github.com/xsank/webssh.git
+> 1.git clone https://github.com/zt06640/webssh.git
 
 > 2.pip install paramiko && pip install tornado
 
